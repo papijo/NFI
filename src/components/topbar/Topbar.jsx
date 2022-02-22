@@ -1,5 +1,4 @@
 import "./topbar.scss";
-import { Person, Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export default function Topbar({ menuOpen, setMenuOpen }) {
