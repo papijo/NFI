@@ -1,0 +1,20 @@
+/* .ModelInfoText {
+  display: none;
+}
+
+.ModelButton {
+  display: none;
+}
+
+.ModelDiv:hover .ModelInfoText {
+  display: inherit;
+  opacity: 1;
+}
+
+.ModelDiv:hover .ModelButton {
+  display: inherit;
+}
+
+.ModelImg:hover {
+  display: none;
+} */

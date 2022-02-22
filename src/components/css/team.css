@@ -1,0 +1,7 @@
+.container:hover .image {
+  opacity: 0.4;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}

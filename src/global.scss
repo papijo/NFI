@@ -1,0 +1,9 @@
+$mainColor: black;
+
+$width: 900px;
+
+@mixin mobile {
+  @media (max-width: #{$width}) {
+    @content;
+  }
+}

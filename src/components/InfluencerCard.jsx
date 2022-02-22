@@ -1,0 +1,42 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import "./css/influencer.css";
+
+const Container = styled.div`
+  flex: 1;
+  margin-top: 50px;
+  :hover {
+    opacity: 0.7;
+  }
+`;
+
+const Image = styled.img`
+  height: 70vh;
+  width: 400px;
+  object-fit: cover;
+`;
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+const InfoText = styled.h2`
+  color: lightgray;
+  font-weight: 300;
+`;
+
+const InfluencerCard = ({ influencer }) => {
+  return (
+    <Container className="InfluencerDiv">
+      <Link className="link" to={`/influencer/${influencer.id}`}>
+        <Image className="InfluencerImg" src={influencer.img} />
+        <Info className="InfluencerInfo">
+          <InfoText className="InfluencerInfoText">{influencer.text}</InfoText>
+        </Info>
+      </Link>
+    </Container>
+  );
+};
+
+export default InfluencerCard;
