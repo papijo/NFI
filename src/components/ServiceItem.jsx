@@ -9,7 +9,7 @@ const Container = styled.div`
   :hover {
     opacity: 0.7;
   }
-  ${mobile({ height: "40vh", flexDirection: "column", margin: "0px" })}
+  ${mobile({ height: "70vh", flexDirection: "column", marginBottom: "15px" })}
 `;
 
 const Image = styled.img`

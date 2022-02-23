@@ -16,7 +16,7 @@ const Container = styled.div`
     padding: "2px",
     flexDirection: "column",
   })}
-  ${tablet({ height: "70vh", margin: "0px" })}
+  ${tablet({ height: "80vh", margin: "0px" })}
 `;
 
 const Services = () => {

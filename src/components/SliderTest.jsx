@@ -33,7 +33,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Container = styled.div`
   padding-bottom: 5px;
   z-index: -1;
-  ${mobile({ marginTop: "950px" })}
+  ${mobile({ marginTop: "1600px" })}
 `;
 
 const Wrapper = styled.div`
