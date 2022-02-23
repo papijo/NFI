@@ -33,7 +33,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Container = styled.div`
   padding-bottom: 5px;
   z-index: -1;
-  ${mobile({ marginTop: "300px" })}
+  ${mobile({ marginTop: "950px" })}
 `;
 
 const Wrapper = styled.div`
@@ -77,7 +77,7 @@ const SliderTest = () => {
     centerMode: true,
     variableWidth: true,
     autoplay: true,
-    autoplaySpeed: 100,
+    autoplaySpeed: 1000,
     cssEase: "linear",
     pauseOnHover: true,
     initialSlide: 0,
@@ -92,7 +92,7 @@ const SliderTest = () => {
           slidesToShow: 1,
           variableWidth: true,
           autoplay: true,
-          autoplaySpeed: 100,
+          autoplaySpeed: 1000,
           cssEase: "linear",
           pauseOnHover: true,
           initialSlide: 0,

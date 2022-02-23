@@ -14,6 +14,7 @@ const Container = styled.div`
     height: "60px",
     marginTop: "0px",
     padding: "2px",
+    flexDirection: "column",
   })}
   ${tablet({ height: "70vh", margin: "0px" })}
 `;

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "animate.css";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div``;
 // const ServiceTitle = styled.h2`
@@ -15,6 +16,7 @@ const ServiceWrapperKey = styled.div`
   font-size: 25px;
   margin-left: 50px;
   font-weight: bold;
+  ${mobile({ marginLeft: "10px" })}
 `;
 const ServiceWrapperPrice = styled.div`
   flex: 1;
