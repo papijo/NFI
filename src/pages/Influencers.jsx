@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import InfluencerCard from "../components/InfluencerCard";
 // import ModelCard from "../components/ModelCard";
 import { influencers } from "../data";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   background-color: black;
@@ -22,6 +23,8 @@ const InfluencersWrapper = styled.div`
   flex-wrap: wrap;
   margin-right: 50px;
   margin-left: 50px;
+  ${mobile({ marginLeft: "20px" })}
+  ${tablet({ marginLeft: "25px", marginRight: "0px" })}
 `;
 
 const Influencers = () => {

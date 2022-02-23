@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import ModelCard from "../components/ModelCard";
+import { mobile, tablet } from "../responsive";
 
 import { models } from "../data";
 
@@ -22,6 +23,8 @@ const ModelsWrapper = styled.div`
   flex-wrap: wrap;
   margin-right: 50px;
   margin-left: 50px;
+  ${mobile({ marginLeft: "20px" })}
+  ${tablet({ marginLeft: "25px", marginRight: "0px" })}
 `;
 
 const Models = () => {
