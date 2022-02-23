@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "animate.css";
-import { mobile, tablet } from "../responsive";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 // const ServiceTitle = styled.h2`
