@@ -18,3 +18,12 @@
 .ModelImg:hover {
   display: none;
 } */
+
+.socialIcon {
+  font-size: 40px !important;
+}
+@media (max-width: 500px) {
+  .socialIcon {
+    font-size: 30px !important;
+  }
+}

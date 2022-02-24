@@ -20,6 +20,7 @@ const Container = styled.div`
   ${tablet({
     width: "100%",
     height: "55vh",
+    marginLeft: "0px",
   })}
 `;
 

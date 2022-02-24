@@ -1,5 +1,6 @@
 // import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   background: black;
@@ -8,6 +9,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
+  ${mobile({ flexDirection: "column" })}
+  ${tablet({ paddingTop: "0px" })}
 `;
 const Left = styled.div`
   flex: 1;
@@ -25,10 +28,14 @@ const Image = styled.img`
 
 const Right = styled.div`
   flex: 1;
+  ${mobile({})}
+  ${tablet({ paddingTop: "70px" })}
 `;
 
 const RightInnerWrapper = styled.div`
   margin-right: 50px;
+  ${mobile({ marginRight: "10px", marginLeft: "10px" })}
+  ${tablet({})}
 `;
 const BioHeading = styled.h1``;
 const BioOne = styled.div`
