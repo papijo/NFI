@@ -13,7 +13,7 @@ import Team from "./pages/Team";
 import TeamDetail from "./pages/TeamDetail";
 import ModelDetail from "./pages/ModelDetail";
 import Influencers from "./pages/Influencers";
-import InfluencerDetail from "./components/InfluencerDetail";
+import InfluencerDetail from "./pages/InfluencerDetail";
 import Topbar from "./components/topbar/Topbar";
 import Menu from "./components/menu/Menu";
 

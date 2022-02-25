@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
-import InfluencerSlider from "./InfluencerSlider";
+import InfluencerSlider from "../components/InfluencerSlider";
 
 const Container = styled.div``;
 

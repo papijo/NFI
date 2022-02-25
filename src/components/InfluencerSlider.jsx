@@ -1,3 +1,4 @@
+import "./css/models.css";
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
@@ -7,15 +8,19 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  margin-top: 50px;
+  padding-bottom: 50px;
   display: flex;
   position: relative;
   overflow: hidden;
   background-color: black;
   color: lightgray;
+  ${mobile({ paddingBottom: "50px", height: "auto" })}
 `;
 
 const Arrow = styled.div`
@@ -36,10 +41,10 @@ const Arrow = styled.div`
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
+  ${mobile({ height: "30px", width: "30px", position: "fixed" })}
 `;
 
 const Wrapper = styled.div`
-  height: 100%;
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
@@ -47,7 +52,6 @@ const Wrapper = styled.div`
 
 const Slide = styled.div`
   width: 100vw;
-  height: 100vh;
   align-items: center;
   /* background-color: ${(props) => props.bg}; */
 `;
@@ -55,8 +59,9 @@ const Slide = styled.div`
 // Slide One
 const SlideOne = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
+  ${mobile({ flexDirection: "column", height: "" })}
+  ${tablet({ flexDirection: "column", height: "80vh" })}
 `;
 const SlideImg = styled.div`
   flex: 1;
@@ -64,17 +69,32 @@ const SlideImg = styled.div`
   align-items: center;
   margin-left: 100px;
   margin-top: 50px;
+  ${mobile({ marginLeft: "30px", marginRight: "20px", height: "30vh" })}
+  ${tablet({ marginLeft: "100px", marginRight: "20px", height: "50vh" })}
 `;
 
 const Image = styled.img`
   height: 80%;
   width: 90%;
   object-fit: cover;
+  ${mobile({ marginLeft: "10px" })}
 `;
 const SlideText = styled.div`
   flex: 1;
   margin-top: 50px;
   margin-right: 100px;
+  ${mobile({
+    marginTop: "0px",
+    marginLeft: "10px",
+    marginRight: "10px",
+    height: "50vh",
+  })}
+  ${tablet({
+    marginTop: "0px",
+    marginLeft: "20px",
+    marginRight: "20px",
+    height: "50vh",
+  })}
 `;
 const BioHeading = styled.div`
   font-size: 30px;
@@ -85,19 +105,50 @@ const BioBodyOne = styled.div`
   text-align: justify;
   margin-bottom: 10px;
 `;
-const BioBodyTwo = styled.div`
-  font-size: 20px;
-  text-align: justify;
-  margin-bottom: 10px;
+// const BioBodyTwo = styled.div`
+//   font-size: 20px;
+//   text-align: justify;
+//   margin-bottom: 10px;
+// `;
+// const BioBodyThree = styled.div`
+//   font-size: 20px;
+//   text-align: justify;
+//   margin-bottom: 10px;
+// `;
+
+const RateCard = styled.div`
+  display: flex;
+  font-size: 25px;
+  ${mobile({ flexDirection: "column" })}
 `;
-const BioBodyThree = styled.div`
-  font-size: 20px;
-  text-align: justify;
-  margin-bottom: 10px;
+
+const RateCardTitle = styled.h1``;
+
+const RateCardLeft = styled.div`
+  flex: 1;
+  margin-right: 10px;
+`;
+const RateCardRight = styled.div`
+  flex: 1;
+  margin-left: 10px;
+`;
+const RateCardContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+`;
+const RateKey = styled.div`
+  flex: 1;
+`;
+const RateValue = styled.div`
+  flex: 1;
+  text-align: right;
 `;
 
 const Social = styled.div`
   display: flex;
+  font-size: 30px !important;
+  margin-bottom: 20px;
+  ${mobile({ fontSize: "25px !important" })}
 `;
 const SocialFacebook = styled.div`
   flex: 1;
@@ -123,13 +174,26 @@ const SlideTwo = styled.div`
   display: flex;
   margin-left: 100px;
   margin-right: 90px;
+  ${mobile({
+    flexDirection: "column",
+    marginRight: "0px",
+    marginLeft: "25px",
+  })}
+  ${tablet({
+    flexDirection: "column",
+    marginRight: "100px",
+    marginLeft: "100px",
+  })}
 `;
 
 const SlideLeft = styled.div`
   flex: 1;
 `;
 
-const SlideLeftImgContainer = styled.div``;
+const SlideLeftImgContainer = styled.div`
+  ${mobile({ height: "60vh" })}
+  ${tablet({ height: "40vh" })}
+`;
 const SlideLeftImage = styled.img`
   height: 90%;
   width: 90%;
@@ -139,7 +203,10 @@ const SlideLeftImage = styled.img`
 const SlideCenter = styled.div`
   flex: 1;
 `;
-const SlideCenterImgContainer = styled.div``;
+const SlideCenterImgContainer = styled.div`
+  ${mobile({ height: "60vh" })}
+  ${tablet({ height: "40vh" })}
+`;
 const SlideCenterImage = styled.img`
   height: 90%;
   width: 90%;
@@ -150,7 +217,10 @@ const SlideRight = styled.div`
   flex: 1;
 `;
 
-const SlideRightImgContainer = styled.div``;
+const SlideRightImgContainer = styled.div`
+  ${mobile({ height: "60vh" })}
+  ${tablet({ height: "40vh" })}
+`;
 const SlideRightImage = styled.img`
   height: 90%;
   width: 90%;
@@ -162,6 +232,16 @@ const SlideThree = styled.div`
   display: flex;
   margin-left: 100px;
   margin-right: 90px;
+  ${mobile({
+    flexDirection: "column",
+    marginRight: "0px",
+    marginLeft: "25px",
+  })}
+  ${tablet({
+    flexDirection: "column",
+    marginRight: "100px",
+    marginLeft: "100px",
+  })}
 `;
 
 const InfluencerSlider = () => {
@@ -197,7 +277,7 @@ const InfluencerSlider = () => {
                 quam nobis nam, expedita quidem! Ea eius officia eaque earum
                 beatae atque?
               </BioBodyOne>
-              <BioBodyTwo>
+              {/* <BioBodyTwo>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
                 labore magni ea unde. Velit, necessitatibus debitis. Iste minima
                 quam nobis nam, expedita quidem! Ea eius officia eaque earum
@@ -208,7 +288,7 @@ const InfluencerSlider = () => {
                 labore magni ea unde. Velit, necessitatibus debitis. Iste minima
                 quam nobis nam, expedita quidem! Ea eius officia eaque earum
                 beatae atque?
-              </BioBodyThree>
+              </BioBodyThree> */}
               <Social>
                 <SocialFacebook>
                   <FacebookOutlined />
@@ -223,6 +303,61 @@ const InfluencerSlider = () => {
                   <P>100k</P>
                 </SocialInstagram>
               </Social>
+              <RateCardTitle>Rate Card</RateCardTitle>
+              <RateCard>
+                <RateCardLeft>
+                  <RateCardContainer>
+                    <RateKey>Single Instagram Post:</RateKey>
+                    <RateValue>$60</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Video Content Single Post:</RateKey>
+                    <RateValue>$70</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Beauty/Makeup Brands:</RateKey>
+                    <RateValue>$70</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Instagram Story Post:</RateKey>
+                    <RateValue>$26</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Ambassadorial Deals (1 Month):</RateKey>
+                    <RateValue>$110</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Ambassadorial Deals (3 Month):</RateKey>
+                    <RateValue>$280</RateValue>
+                  </RateCardContainer>
+                </RateCardLeft>
+                <RateCardRight>
+                  <RateCardContainer>
+                    <RateKey>Ambassadorial Deals (6 Month):</RateKey>
+                    <RateValue>$500</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Client Flyer/Post:</RateKey>
+                    <RateValue>$70</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Catalog Shoots (per hour):</RateKey>
+                    <RateValue>$70</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Music Videos (Daytime) :</RateKey>
+                    <RateValue>$100</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Music Videos (Nighttime) :</RateKey>
+                    <RateValue>$130</RateValue>
+                  </RateCardContainer>
+                  <RateCardContainer>
+                    <RateKey>Instagram Reels :</RateKey>
+                    <RateValue>$50</RateValue>
+                  </RateCardContainer>
+                </RateCardRight>
+              </RateCard>
             </SlideText>
           </SlideOne>
         </Slide>
