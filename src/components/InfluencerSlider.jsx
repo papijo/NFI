@@ -6,9 +6,11 @@ import {
   Instagram,
   Twitter,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../utils/requestMethods";
 
 const Container = styled.div`
   width: 100%;
@@ -254,6 +256,21 @@ const InfluencerSlider = () => {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
   };
+
+  //Get Influencer
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [influencer, setInfluencer] = useState({});
+
+  useEffect(() => {
+    const getInfluencer = async () => {
+      const res = await publicRequest.get(`/influencer/find/${id}`);
+      setInfluencer(res.data);
+    };
+    getInfluencer();
+  }, [id]);
+
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
@@ -266,17 +283,12 @@ const InfluencerSlider = () => {
             <SlideImg>
               <Image
                 className="animate__animated animate__fadeIn animate__slower"
-                src="https://images.pexels.com/photos/7243129/pexels-photo-7243129.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                src={influencer.img2}
               />
             </SlideImg>
             <SlideText>
-              <BioHeading>Bio: Checks</BioHeading>
-              <BioBodyOne>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                labore magni ea unde. Velit, necessitatibus debitis. Iste minima
-                quam nobis nam, expedita quidem! Ea eius officia eaque earum
-                beatae atque?
-              </BioBodyOne>
+              <BioHeading>{influencer.name}</BioHeading>
+              <BioBodyOne>{influencer.bio}</BioBodyOne>
               {/* <BioBodyTwo>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
                 labore magni ea unde. Velit, necessitatibus debitis. Iste minima
@@ -308,53 +320,59 @@ const InfluencerSlider = () => {
                 <RateCardLeft>
                   <RateCardContainer>
                     <RateKey>Single Instagram Post:</RateKey>
-                    <RateValue>$60</RateValue>
+                    <RateValue>${influencer.singleInstagramPost}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Video Content Single Post:</RateKey>
-                    <RateValue>$70</RateValue>
+                    <RateValue>${influencer.videoContentSinglePost}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Beauty/Makeup Brands:</RateKey>
-                    <RateValue>$70</RateValue>
+                    <RateValue>${influencer.beautifyBrands}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Instagram Story Post:</RateKey>
-                    <RateValue>$26</RateValue>
+                    <RateValue>${influencer.instagramStoryPost}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Ambassadorial Deals (1 Month):</RateKey>
-                    <RateValue>$110</RateValue>
+                    <RateValue>
+                      ${influencer.ambassadorialDealOneMonth}
+                    </RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Ambassadorial Deals (3 Month):</RateKey>
-                    <RateValue>$280</RateValue>
+                    <RateValue>
+                      ${influencer.ambassadorialDealThreeMonth}
+                    </RateValue>
                   </RateCardContainer>
                 </RateCardLeft>
                 <RateCardRight>
                   <RateCardContainer>
                     <RateKey>Ambassadorial Deals (6 Month):</RateKey>
-                    <RateValue>$500</RateValue>
+                    <RateValue>
+                      ${influencer.ambassadorialDealSixMonth}
+                    </RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Client Flyer/Post:</RateKey>
-                    <RateValue>$70</RateValue>
+                    <RateValue>${influencer.clientFlyer}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Catalog Shoots (per hour):</RateKey>
-                    <RateValue>$70</RateValue>
+                    <RateValue>${influencer.catalogShoots}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Music Videos (Daytime) :</RateKey>
-                    <RateValue>$100</RateValue>
+                    <RateValue>${influencer.musicVideosDT}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Music Videos (Nighttime) :</RateKey>
-                    <RateValue>$130</RateValue>
+                    <RateValue>${influencer.musicVideosNT}</RateValue>
                   </RateCardContainer>
                   <RateCardContainer>
                     <RateKey>Instagram Reels :</RateKey>
-                    <RateValue>$50</RateValue>
+                    <RateValue>${influencer.instagramReels}</RateValue>
                   </RateCardContainer>
                 </RateCardRight>
               </RateCard>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import ModelCard from "../components/ModelCard";
 import { mobile, tablet } from "../responsive";
+import { publicRequest } from "./../utils/requestMethods";
 
-import { models } from "../data";
+// import { models } from "../data";
 
 const Container = styled.div`
   background-color: black;
@@ -28,6 +29,16 @@ const ModelsWrapper = styled.div`
 `;
 
 const Models = () => {
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    const getModels = async () => {
+      const res = await publicRequest.get("model/");
+      setModels(res.data);
+    };
+    getModels();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
@@ -35,7 +46,7 @@ const Models = () => {
 
         <ModelsWrapper>
           {models.map((model) => (
-            <ModelCard key={model.id} model={model} />
+            <ModelCard key={model._id} model={model} />
           ))}
         </ModelsWrapper>
       </Wrapper>

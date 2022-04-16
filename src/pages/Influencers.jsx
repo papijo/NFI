@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import InfluencerCard from "../components/InfluencerCard";
 // import ModelCard from "../components/ModelCard";
 import { influencers } from "../data";
 import { mobile, tablet } from "../responsive";
+import { publicRequest } from "../utils/requestMethods";
 
 const Container = styled.div`
   background-color: black;
@@ -28,13 +29,23 @@ const InfluencersWrapper = styled.div`
 `;
 
 const Influencers = () => {
+  const [influencers, setInfluencers] = useState([]);
+
+  useEffect(() => {
+    const getInfluencers = async () => {
+      const res = await publicRequest.get("influencer/");
+      setInfluencers(res.data);
+    };
+    getInfluencers();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
         <ContainerTitle>Influencers</ContainerTitle>
         <InfluencersWrapper>
           {influencers.map((influencer) => (
-            <InfluencerCard key={influencer.id} influencer={influencer} />
+            <InfluencerCard key={influencer._id} influencer={influencer} />
           ))}
         </InfluencersWrapper>
       </Wrapper>

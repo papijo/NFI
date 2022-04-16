@@ -1,22 +1,31 @@
 import "./topbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/authApiCalls";
+import { clearInfluencers } from "../../redux/influencerRedux";
+import { clearModels } from "../../redux/modelRedux";
 
 export default function Topbar({ menuOpen, setMenuOpen }) {
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    dispatch(logout);
+    localStorage.removeItem("persist:root");
+    navigate("/");
+
+    // dispatch(clearInfluencers);
+    // dispatch(clearModels);
+  };
+
   return (
     <div className={"topbar " + (menuOpen && "active")}>
       <div className="wrapper">
         <div className="left">
-          <a href="#intro" className="logo">
+          <a href="/" className="logo">
             NFI
           </a>
-          {/* <div className="itemContainer">
-            <Person className="icon" />
-            <span>+44 924 12 74</span>
-          </div>
-          <div className="itemContainer">
-            <Mail className="icon" />
-            <span>safak@genius.com</span>
-          </div> */}
         </div>
         <div className="menuRight">
           <ul className="menuLinks">
@@ -40,11 +49,19 @@ export default function Topbar({ menuOpen, setMenuOpen }) {
                 Contact Us
               </Link>
             </li>
-            <li className="menuItemLinks">
-              <Link className="link" to="/login">
-                Login
-              </Link>
-            </li>
+            {user == null ? (
+              <li className="menuItemLinks">
+                <Link className="link" to="/login">
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li className="menuItemLinks" onClick={handleLogout}>
+                <Link className="link" to="/login">
+                  Logout
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         <div className="right">

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "./css/models.css";
@@ -34,13 +33,13 @@ const InfoText = styled.h2`
 const ModelCard = ({ model }) => {
   return (
     <Container className="ModelDiv">
-      <Link className="link" to={`/model/${model.id}`}>
+      <Link className="link" to={`/model/${model._id}`}>
         <Image
           className="ModeImg animate__animated animate__fadeIn animate__slower"
-          src={model.img}
+          src={model.img1}
         />
         <Info className="ModelInfo">
-          <InfoText className="ModelInfoText">{model.text}</InfoText>
+          <InfoText className="ModelInfoText">{model.name}</InfoText>
         </Info>
       </Link>
     </Container>

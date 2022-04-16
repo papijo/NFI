@@ -34,10 +34,13 @@ const InfoText = styled.h2`
 const InfluencerCard = ({ influencer }) => {
   return (
     <Container className="InfluencerDiv">
-      <Link className="link" to={`/influencer/${influencer.id}`}>
-        <Image className="InfluencerImg" src={influencer.img} />
+      <Link className="link" to={`/influencer/${influencer._id}`}>
+        <Image
+          className="InfluencerImg animate__animated animate__fadeIn animate__slower "
+          src={influencer.img1}
+        />
         <Info className="InfluencerInfo">
-          <InfoText className="InfluencerInfoText">{influencer.text}</InfoText>
+          <InfoText className="InfluencerInfoText">{influencer.name}</InfoText>
         </Info>
       </Link>
     </Container>

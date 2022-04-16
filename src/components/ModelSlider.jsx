@@ -6,9 +6,11 @@ import {
   Instagram,
   Twitter,
 } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../utils/requestMethods";
 
 const Container = styled.div`
   width: 100%;
@@ -107,6 +109,12 @@ const BioBodyOne = styled.div`
   font-size: 30px;
   text-align: justify;
   margin-bottom: 25px;
+  ${tablet({
+    fontSize: "20px",
+  })}
+  ${mobile({
+    fontSize: "20px",
+  })}
 `;
 
 const Biodata = styled.div`
@@ -255,6 +263,27 @@ const ModelSlider = () => {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
   };
+
+  //Get Model
+
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const [model, setModel] = useState({});
+  const [age, setAge] = useState("");
+
+  useEffect(() => {
+    const getModel = async () => {
+      const res = await publicRequest.get(`/model/find/${id}`);
+      setModel(res.data);
+      let today = new Date();
+      let bday = new Date(res.data.dob);
+      let Age = today.getFullYear() - bday.getFullYear();
+      setAge(Age);
+    };
+    getModel();
+  }, [id]);
+
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
@@ -268,17 +297,12 @@ const ModelSlider = () => {
             <SlideImg>
               <Image
                 className="animate__animated animate__fadeIn animate__slower"
-                src="https://images.pexels.com/photos/10368603/pexels-photo-10368603.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                src={model.img2}
               />
             </SlideImg>
             <SlideText>
-              <BioHeading>Bio: Name</BioHeading>
-              <BioBodyOne>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                labore magni ea unde. Velit, necessitatibus debitis. Iste minima
-                quam nobis nam, expedita quidem! Ea eius officia eaque earum
-                beatae atque?
-              </BioBodyOne>
+              <BioHeading>Bio: {model.name}</BioHeading>
+              <BioBodyOne>{model.bio}</BioBodyOne>
               {/* <BioBodyTwo>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
                 labore magni ea unde. Velit, necessitatibus debitis. Iste minima
@@ -310,55 +334,55 @@ const ModelSlider = () => {
                   <BioTitle>Physical</BioTitle>
                   <BioContainer>
                     <BioKey>Age</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue>{age} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Bust</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue>{model.bust} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Waist</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue> {model.waist} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Weight</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue>{model.weight} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Height</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue> {model.height} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Shoe-Size</BioKey>
-                    <BioValue>27</BioValue>
+                    <BioValue>{model.shoeSize} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Hair Color</BioKey>
-                    <BioValue>Brown</BioValue>
+                    <BioValue>{model.hairColor} </BioValue>
                   </BioContainer>
                   <BioContainer>
                     <BioKey>Eye Color</BioKey>
-                    <BioValue>Brown</BioValue>
+                    <BioValue>{model.eyeColor} </BioValue>
                   </BioContainer>
                 </BiodataLeft>
                 <BiodataRight>
-                  <BioTitle>Placement</BioTitle>
-                  <BioContainer>
-                    <BioKey>Next</BioKey>
-                    <BioValue>London</BioValue>
-                  </BioContainer>
-                  <BioContainer>
-                    <BioKey>Next</BioKey>
-                    <BioValue>Paris</BioValue>
-                  </BioContainer>
-                  <BioContainer>
-                    <BioKey>Next</BioKey>
-                    <BioValue>Italy</BioValue>
-                  </BioContainer>
-                  <BioContainer>
-                    <BioKey>Vogue</BioKey>
-                    <BioValue>London</BioValue>
-                  </BioContainer>
+                  <BioTitle
+                    style={
+                      model?.placement?.length > 0
+                        ? { display: "block" }
+                        : { display: "none" }
+                    }
+                  >
+                    Placement
+                  </BioTitle>
+                  {model?.placement?.map((p) => (
+                    <>
+                      <BioContainer>
+                        <BioKey>{p.name}</BioKey>
+                        <BioValue>{p.location} </BioValue>
+                      </BioContainer>
+                    </>
+                  ))}
                 </BiodataRight>
               </Biodata>
             </SlideText>
@@ -370,17 +394,17 @@ const ModelSlider = () => {
           <SlideTwo>
             <SlideLeft>
               <SlideLeftImgContainer>
-                <SlideLeftImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideLeftImage src={model.img3} />
               </SlideLeftImgContainer>
             </SlideLeft>
             <SlideCenter>
               <SlideCenterImgContainer>
-                <SlideCenterImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideCenterImage src={model.img4} />
               </SlideCenterImgContainer>
             </SlideCenter>
             <SlideRight>
               <SlideRightImgContainer>
-                <SlideRightImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideRightImage src={model.img5} />
               </SlideRightImgContainer>
             </SlideRight>
           </SlideTwo>
@@ -390,17 +414,17 @@ const ModelSlider = () => {
           <SlideThree>
             <SlideLeft>
               <SlideLeftImgContainer>
-                <SlideLeftImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideLeftImage src={model.img6} />
               </SlideLeftImgContainer>
             </SlideLeft>
             <SlideCenter>
               <SlideCenterImgContainer>
-                <SlideCenterImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideCenterImage src={model.img7} />
               </SlideCenterImgContainer>
             </SlideCenter>
             <SlideRight>
               <SlideRightImgContainer>
-                <SlideRightImage src="https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+                <SlideRightImage src={model.img8} />
               </SlideRightImgContainer>
             </SlideRight>
           </SlideThree>
