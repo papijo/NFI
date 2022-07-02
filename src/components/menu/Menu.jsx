@@ -21,7 +21,7 @@ export default function Menu({ menuOpen, setMenuOpen }) {
           {" "}
           <li onClick={() => setMenuOpen(false)}>Contact Us</li>
         </Link>
-        <Link className="link" to="/">
+        <Link className="link" to="/login">
           {" "}
           <li onClick={() => setMenuOpen(false)}>Login</li>
         </Link>
